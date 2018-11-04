@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<title>SendIT- Admin Profile</title>
+<body>
+  <div class="toptitle">
+    <div class="ntitle">
+    <h1>SendIT</h1>
+    </div>
+  </div>
+
+<div class="topnav">
+  <a href="index.html">Home</a>
+  <a href="adminProfile.html">Profile</a>
+  <a href="index.html">Log Out</a>
+</div>
+
+<div class="title2">
+  <h2>Manage Parcels</h2>
+  <h3>View and click row to edit parcel delivery orders
+</div>
+<div>
+
+
+  <div class="container">
+    <div class="tab tab-2" >
+      <table id="table">
+        <tr>
+          <th> Pick-up location</th>
+          <th> Destination</th>
+          <th> Status</th>
+        </tr>
+        <tr>
+          <td>A1</td>
+          <td>B1</td>
+          <td>Delivered</td>
+        </tr>
+        <tr>
+          <td>A2</td>
+          <td>B2</td>
+          <td>In transit</td>
+        </tr>
+        <tr>
+          <td>A3</td>
+          <td>B3</td>
+          <td>In transit</td>
+        </tr>
+      </table>
+      
+    </div>
+    
+  </div>
+  <div class="tab tab-2">
+    Pick-up Location:<input type="text" name="plocation" id="plocation">
+    Destination:<input type="text" name="destination" id="destination">
+    Status:<input type="text" name="status" id="status">
+    <button onclick="editHtmlTbleSelectedRow();">Edit</button>
+  </div>
+  <script type="text/javascript">
+    var rIndex,
+      table = document.getElementById('table');
+
+    // check the empty input
+    function checkEmptyInput()
+    {
+      var isEmpty = false,
+      plocation = document.getElementById('plocation').value,
+        destination = document.getElementById('destination').value,
+        status = document.getElementById('status').value;
+
+        if(plocation === ""){
+          alert("Pick-up Location cannot be Empty");
+          isEmpty = true;
+        }
+
+        
+        else if(destination === ""){
+          alert("Destination cannot be Empty");
+          isEmpty = true;
+        }
+        
+        else if(status === ""){
+          alert("Status cannot be Empty");
+          isEmpty = true;
+        }
+
+        return isEmpty;
+        
+    }
+
+
+    function selectedRowToInput()
+    {
+      
+      for(var i=1; i<table.rows.length;i++)
+      {
+        table.rows[i].onclick = function()
+        {
+          // get the selected row index
+          rIndex = this.rowIndex;
+          document.getElementById('plocation').value = this.cells[0].innerHTML;
+          document.getElementById('destination').value = this.cells[1].innerHTML;
+          document.getElementById('status').value = this.cells[2].innerHTML;
+        };
+      }
+    }
+    selectedRowToInput();
+
+    function editHtmlTbleSelectedRow()
+    {
+      var plocation = document.getElementById('plocation').value,
+      destination = document.getElementById('destination').value,
+      status = document.getElementById('status').value;
+
+      if(!checkEmptyInput()){
+      table.rows[rIndex].cells[0].innerHTML = plocation;
+      table.rows[rIndex].cells[1].innerHTML = destination;
+      table.rows[rIndex].cells[2].innerHTML = status;
+      }
+    }
+
+  </script> 
+
+  
+
+
+</div>
+</body>
+</html>
