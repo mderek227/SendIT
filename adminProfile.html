@@ -21,45 +21,60 @@
 
 <div class="title2">
   <h2>Manage Parcels</h2>
-  <h3>View and click row to edit parcel delivery orders
+  <h3>View and click on row to edit parcel delivery order
 </div>
 <div>
 
 
   <div class="container">
+    <div class="tab tab-2">
+    Pick-up Location:<input disabled type="text" name="plocation" id="plocation">
+    Destination:<input disabled type="text" name="destination" id="destination">
+    Current Location:<input type="text" name="clocation" id="clocation">
+    Status:<input type="text" name="status" id="status">
+    Price:<input type="text" name="price" id="price">
+    <button onclick="editHtmlTbleSelectedRow();">Edit</button>
+  </div>
+
+
     <div class="tab tab-2" >
       <table id="table">
         <tr>
           <th> Pick-up location</th>
           <th> Destination</th>
+          <th> Current Location</th>
           <th> Status</th>
+          <th> Price</th>
         </tr>
         <tr>
-          <td>A1</td>
-          <td>B1</td>
+          <td>Rubaga</td>
+          <td>Bukoto</td>
+          <td>Bukoto</td>
           <td>Delivered</td>
+          <td>10000</td>
         </tr>
         <tr>
-          <td>A2</td>
-          <td>B2</td>
+          <td>Luzira</td>
+          <td>Gaba</td>
+          <td>Nakawa</td>
           <td>In transit</td>
+          <td>30000</td>
         </tr>
         <tr>
-          <td>A3</td>
-          <td>B3</td>
+          <td>Mengo</td>
+          <td>Kawempe</td>
+          <td>Makerere</td>
           <td>In transit</td>
+          <td>20000</td>
         </tr>
       </table>
       
     </div>
     
   </div>
-  <div class="tab tab-2">
-    Pick-up Location:<input type="text" name="plocation" id="plocation">
-    Destination:<input type="text" name="destination" id="destination">
-    Status:<input type="text" name="status" id="status">
-    <button onclick="editHtmlTbleSelectedRow();">Edit</button>
-  </div>
+
+
+
   <script type="text/javascript">
     var rIndex,
       table = document.getElementById('table');
@@ -70,7 +85,9 @@
       var isEmpty = false,
       plocation = document.getElementById('plocation').value,
         destination = document.getElementById('destination').value,
-        status = document.getElementById('status').value;
+        clocation = document.getElementById('clocation').value,
+        status = document.getElementById('status').value,
+        price = document.getElementById('price').value;
 
         if(plocation === ""){
           alert("Pick-up Location cannot be Empty");
@@ -82,9 +99,19 @@
           alert("Destination cannot be Empty");
           isEmpty = true;
         }
+
+        else if(clocation === ""){
+          alert("Current Location cannot be Empty");
+          isEmpty = true;
+        }
         
         else if(status === ""){
           alert("Status cannot be Empty");
+          isEmpty = true;
+        }
+
+        else if(price === ""){
+          alert("Price cannot be Empty");
           isEmpty = true;
         }
 
@@ -104,7 +131,9 @@
           rIndex = this.rowIndex;
           document.getElementById('plocation').value = this.cells[0].innerHTML;
           document.getElementById('destination').value = this.cells[1].innerHTML;
-          document.getElementById('status').value = this.cells[2].innerHTML;
+          document.getElementById('clocation').value = this.cells[2].innerHTML;
+          document.getElementById('status').value = this.cells[3].innerHTML;
+          document.getElementById('price').value = this.cells[4].innerHTML;
         };
       }
     }
@@ -114,12 +143,16 @@
     {
       var plocation = document.getElementById('plocation').value,
       destination = document.getElementById('destination').value,
-      status = document.getElementById('status').value;
+      clocation = document.getElementById('clocation').value,
+      status = document.getElementById('status').value,
+      price = document.getElementById('price').value;
 
       if(!checkEmptyInput()){
       table.rows[rIndex].cells[0].innerHTML = plocation;
       table.rows[rIndex].cells[1].innerHTML = destination;
-      table.rows[rIndex].cells[2].innerHTML = status;
+      table.rows[rIndex].cells[2].innerHTML = clocation;
+      table.rows[rIndex].cells[3].innerHTML = status;
+      table.rows[rIndex].cells[4].innerHTML = price;
       }
     }
 
